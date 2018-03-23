@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        #map {
+            width: 1165px;
+            height: 889px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/ST_GBIF_spp_Cleaned_0.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        function pop_ST_GBIF_spp_Cleaned_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>name</strong><br />' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['decimalLatitude'] !== null ? Autolinker.link(String(feature.properties['decimalLatitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['decimalLongitude'] !== null ? Autolinker.link(String(feature.properties['decimalLongitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">year</th>\
+                        <td>' + (feature.properties['year'] !== null ? Autolinker.link(String(feature.properties['year'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">references</th>\
+                        <td>' + (feature.properties['references'] !== null ? Autolinker.link(String(feature.properties['references'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">locality</th>\
+                        <td>' + (feature.properties['locality'] !== null ? Autolinker.link(String(feature.properties['locality'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">recordedBy</th>\
+                        <td>' + (feature.properties['recordedBy'] !== null ? Autolinker.link(String(feature.properties['recordedBy'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ST_GBIF_spp_Cleaned_0_0(feature) {
+            switch(String(feature.properties['name'])) {
+                case 'Arctostaphylos viscida':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(97,237,156,1.0)',
+            }
+                    break;
+                case 'Azara microphylla':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,168,60,1.0)',
+            }
+                    break;
+                case 'Cornus sessilis':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,229,201,1.0)',
+            }
+                    break;
+                case 'Cupressus arizonica':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,29,56,1.0)',
+            }
+                    break;
+                case 'Cupressus goveniana':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,156,229,1.0)',
+            }
+                    break;
+                case 'Erythrina variegata':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,207,237,1.0)',
+            }
+                    break;
+                case 'Itea ilicifolia':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,75,25,1.0)',
+            }
+                    break;
+                case 'Myoporum insulare':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,101,206,1.0)',
+            }
+                    break;
+                case 'Pistacia vera':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(120,220,44,1.0)',
+            }
+                    break;
+                case 'Populus acuminata':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,123,203,1.0)',
+            }
+                    break;
+                case 'Pseudopanax lessonii':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,33,148,1.0)',
+            }
+                    break;
+                case 'Rhododendron macrophyllum':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,204,28,1.0)',
+            }
+                    break;
+                case 'Salix lucida':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,233,81,1.0)',
+            }
+                    break;
+                case 'Sparmannia africana':
+                    return {
+                pane: 'pane_ST_GBIF_spp_Cleaned_0',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(162,73,235,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ST_GBIF_spp_Cleaned_0');
+        map.getPane('pane_ST_GBIF_spp_Cleaned_0').style.zIndex = 400;
+        map.getPane('pane_ST_GBIF_spp_Cleaned_0').style['mix-blend-mode'] = 'normal';
+        var layer_ST_GBIF_spp_Cleaned_0 = new L.geoJson(json_ST_GBIF_spp_Cleaned_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ST_GBIF_spp_Cleaned_0',
+            onEachFeature: pop_ST_GBIF_spp_Cleaned_0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ST_GBIF_spp_Cleaned_0_0(feature));
+            },
+        });
+        var cluster_ST_GBIF_spp_Cleaned_0 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ST_GBIF_spp_Cleaned_0.addLayer(layer_ST_GBIF_spp_Cleaned_0);
+
+        bounds_group.addLayer(layer_ST_GBIF_spp_Cleaned_0);
+        cluster_ST_GBIF_spp_Cleaned_0.addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: cluster_ST_GBIF_spp_Cleaned_0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'name'}));
+        </script>
+    </body>
+</html>
